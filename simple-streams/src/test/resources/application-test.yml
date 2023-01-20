@@ -1,0 +1,24 @@
+
+#server:
+#  port: 8080
+#
+#kafka:
+#  bootstrapAddress: localhost:9092
+#
+#topic:
+#  event:
+#    name: testevent
+#    stream:
+#      name: stream-output
+
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      group-id: testgroup
+test:
+  topic: embedded-test-topic
+  logtopic: embedded-test-log-topic
+

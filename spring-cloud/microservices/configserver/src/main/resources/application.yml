@@ -1,0 +1,44 @@
+server:
+  port: 8888
+
+management:  server:    servlet:      context-path: /admin
+      
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+    
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+
+spring:
+  application:    name: configserver
+    
+  profiles:    active:    - native
+  cloud:
+    config:
+      server:
+        native: 
+          search-locations: 
+             - classpath:config/
+ 
+#            - file:///C:/
+    
+#        git:
+#          uri: https://github.com/spring-cloud-samples/config-repo
+#          basedir: target/config
+
+# ---
+
+# eureka:
+#  password: password
+#  instance:
+#    hostname: ${vcap.application.uris[0]}
+#   nonSecurePort: 80
+
+#  client:
+#    serviceUrl:
+#     defaultZone: ${vcap.services.${PREFIX:}eureka.credentials.uri:http://user:${eureka.password:}@${PREFIX:}eureka.${application.domain:cfapps.io}}/eureka/

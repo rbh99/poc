@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: car-service
+  cloud:
+    discovery:
+      enabled: true
+      
+
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+server:
+  port: 2222  
+    

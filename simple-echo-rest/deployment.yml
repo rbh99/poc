@@ -1,0 +1,28 @@
+# deployment manifest for kubernetes
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-rest-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-rest-example
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: echo-rest-example
+        tier: backend
+    spec:
+      containers:
+      - name: echo-rest-example
+        image: echo-app
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+         - name: GET_HOSTS_FROM
+           value: dns
+    

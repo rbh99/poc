@@ -1,0 +1,27 @@
+
+server:
+  port: 8080
+  servlet:
+    context-path: /auth
+
+
+# register some client
+
+# not for production though
+#security:
+#  oauth2:
+#    client:    
+    
+user:
+  oauth:
+    client-id: R2dpxQ3vPrtfgF72
+    client-secret: fDw7Mpkk5czHNuSRtmhGmAGL42CaxQB9
+    # to client app
+    redirect-uris: http://localhost:8082/login
+
+#and some user
+    user:
+      username: bodo
+      password: pass
+  
+  

@@ -1,0 +1,7 @@
+prop1: aaa
+
+aservice:
+  myproperty: read from configuration server
+  
+
+

@@ -1,0 +1,19 @@
+server:
+  port: 8082
+  servlet:
+    session:
+      cookie:
+        name: UISESSION
+      
+security:
+  oauth2:
+    client:
+      client-id: R2dpxQ3vPrtfgF72
+      client-secret: fDw7Mpkk5czHNuSRtmhGmAGL42CaxQB9
+    resource:
+      token-info-uri: http://localhost:8080/auth/oauth/check_token   
+      
+                 
+            
+            
+            

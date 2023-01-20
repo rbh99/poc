@@ -1,0 +1,23 @@
+security:
+  oauth2:
+    client:
+      clientId: car-service
+      clientSecret: 1234
+      accessTokenUri: http://localhost:8081/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+server:
+  servlet:
+    context-path: /cars
+  #port: 2222
+
+feign:
+  hystrix:
+    enabled: true
+    
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8080/uaa/user/current
+      token-info-uri: http://localhost:8080/uaa/oauth/check_token     

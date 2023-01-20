@@ -1,0 +1,22 @@
+
+spring:
+  application:
+    name: bservice
+    
+info:
+  app:
+    name: B Microservice
+    description: This is the bottom client
+    version: 1.0.0    
+
+server:
+  port: 9100
+
+
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true  

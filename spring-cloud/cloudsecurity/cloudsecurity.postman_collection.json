@@ -1,0 +1,81 @@
+{
+	"variables": [],
+	"info": {
+		"name": "cloudsecurity",
+		"_postman_id": "e984414e-bab8-564b-739c-dd6ff2390f73",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth1",
+			"request": {
+				"url": "",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "auth1",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "clientWebAppUser",
+						"password": "pass",
+						"saveHelperData": true,
+						"showPassword": false
+					}
+				},
+				"url": "localhost:8080/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic Y2xpZW50V2ViQXBwVXNlcjpwYXNz",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "writer",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "secret",
+							"value": "pass",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
