@@ -21,6 +21,9 @@ pom.xml.bak
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
+.mvn/
+mvnw
+mvnw.cmd
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
@@ -33,6 +36,9 @@ build/
 .gradletasknamecache
 gradle-app.setting
 !gradle-wrapper.jar
+gradle/
+gradlew
+gradlew.bat
 
 ##############################
 ## IntelliJ
