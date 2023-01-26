@@ -1,4 +1,15 @@
-
+spring:
+  application:
+    name: spring-app
+  kafka:
+    application-id: myapp
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      group-id: testgroup
+test:
+  topic: embedded-test-topic
+  logtopic: embedded-test-log-topic
 
 
 

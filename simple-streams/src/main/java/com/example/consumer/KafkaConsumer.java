@@ -1,7 +1,8 @@
-package com.example;
+package com.example.consumer;
 
 import java.util.concurrent.CountDownLatch;
 
+import com.example.producer.KafkaProducer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,14 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+/**
+ * You can receive messages by configuring a
+ * MessageListenerContainer and providing a message listener
+ *
+ * or by using the @KafkaListener annotation.
+ */
+
 
 @Component
 @Slf4j

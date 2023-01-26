@@ -1,4 +1,4 @@
-package com.example;
+package com.example.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -9,13 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class LogKafkaConsumer {
-	
-	
-	
-	
-	@KafkaListener(topics = "${test.logtopic}")
+
+	@KafkaListener(topics = {"${test.logtopic}", "${test.logtopic}"} )
     public void logtopic(ConsumerRecord<?, ?> consumerRecord) {
-        log.info("received payload='{}'", consumerRecord.toString());
+        log.info("LOG Consumer received payload='{}'", consumerRecord.toString());
     }
 
 }

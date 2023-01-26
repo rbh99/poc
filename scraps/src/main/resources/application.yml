@@ -1,0 +1,15 @@
+logging:
+  #file:
+    #path: logback.xml.old
+  pattern:
+    console: "%clr(%d{HH:mm:ss.SSS} [%t] %-5level) %cyan(%logger{36}) - %msg%n"
+  level:
+    org.springframework: INFO
+    root: DEBUG
+
+spring:
+  profiles:
+    active: test
+  output:
+    ansi:
+      enabled: ALWAYS

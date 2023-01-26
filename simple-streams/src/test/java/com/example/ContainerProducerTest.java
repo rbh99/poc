@@ -7,14 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.kafka.clients.admin.NewTopic;
+import com.example.consumer.KafkaConsumer;
+import com.example.producer.KafkaProducer;
 import org.junit.ClassRule;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -29,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Testcontainers
 @ActiveProfiles("test")
-@SpringBootTest //(properties = {"bootstrap.servers = [PLAINTEXT://localhost:9093]", "kafka.bootstrapAddress = localhost:9093"})
+@SpringBootTest
 @DirtiesContext
 @Slf4j
 public class ContainerProducerTest {
@@ -54,15 +53,13 @@ public class ContainerProducerTest {
 	@Value("${test.topic}")
 	private String topic;
 
+
 	@Test
 	public void givenKafkaDockerContainer_whenSendingWithSimpleProducer_thenMessageReceived() throws Exception {
 		
 		assertThat(kafkaContainer.isRunning()).isTrue();
 		log.info("bootstrap servers {}", kafkaContainer.getBootstrapServers());
-		
-		// topic  exits?
-		
-		
+
 		String data = "Sending with our own simple KafkaProducer";
 
 		producer.send(topic, data);
