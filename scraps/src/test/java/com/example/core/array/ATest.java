@@ -1,4 +1,4 @@
-package com.example.arrays;
+package com.example.core.array;
 
 public class ATest {
 	public static void main(String[] args) {

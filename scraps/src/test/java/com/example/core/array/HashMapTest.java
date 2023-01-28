@@ -1,4 +1,4 @@
-package com.example.arrays;
+package com.example.core.array;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -101,19 +101,14 @@ The sum of the results for all get queries.
 	
 	TriFunction<MyMap<Integer, Integer> , String, int[], Integer> mappingFunction = 
 			(m,qt, q) -> {
-				
-				switch (qt){
-					case "insert":
-						m.add(q[0], q[1]);
-						break;
-					case "addToValue":
-						m.addToValue(q[0]);
-						break;
-					case "addToKey":
-						m.addToKey(q[0]);
-						break;
-					case "get":
+
+				switch (qt) {
+					case "insert" -> m.add(q[0], q[1]);
+					case "addToValue" -> m.addToValue(q[0]);
+					case "addToKey" -> m.addToKey(q[0]);
+					case "get" -> {
 						return m.get(q[0]);
+					}
 				}
 				return 0;
 			};
@@ -163,13 +158,12 @@ The sum of the results for all get queries.
 		}
 
 		public void addToValue(int i) {
-			for (int j=0; j< hashNodes.length; j++) {
-				Node n = hashNodes[j];
-				if (n!=null) {
-					n.value+=i;
+			for (Node n : hashNodes) {
+				if (n != null) {
+					n.value += i;
 					Node nx = n.next;
-					while (nx!=null) {
-						nx.value+=i;
+					while (nx != null) {
+						nx.value += i;
 						nx = nx.next;
 					}
 				}
@@ -183,8 +177,7 @@ The sum of the results for all get queries.
 		 */
 
 		public Integer get(int i) {
-			Node m = hashNodes[getHash(i)];
-			Node nxt = m;
+			Node nxt = hashNodes[getHash(i)];
 			while (nxt!=null) {
 				if (nxt.key == i) {
 					return nxt.value;

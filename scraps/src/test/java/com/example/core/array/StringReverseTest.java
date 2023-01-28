@@ -1,17 +1,20 @@
-package com.example.arrays;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package com.example.core.array;
 
 import org.junit.jupiter.api.Test;
 
-public class StringTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class StringReverseTest {
 	
 	@Test
 	void test() {
-		assertEquals("rab", solution("(bar)"));
+
+		assertEquals("rab", reverseStringsInBrackets("(bar)"));
+
+		assertEquals("foocbarab", reverseStringsInBrackets("(bar(foo(abc)))"));
 	}
 	
-	String solution(String inputString) {
+	String reverseStringsInBrackets(String inputString) {
 
 	    int start = inputString.lastIndexOf("(");
 	    int end = inputString.indexOf(")", start);

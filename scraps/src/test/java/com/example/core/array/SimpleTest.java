@@ -1,10 +1,9 @@
-package com.example.arrays;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
+package com.example.core.array;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
 public class SimpleTest {
@@ -18,10 +17,8 @@ public class SimpleTest {
 		
 		String s = Integer.toString(i, 2);
 		//pad
-		StringBuilder sb = new StringBuilder("");
-		for (int j=0; j<length-s.length(); j++) {
-			sb.append('0');
-		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("0".repeat(Math.max(0, length - s.length())));
 		sb.append(s);
 		assertEquals(sb.length(), length);
 		s=sb.toString();

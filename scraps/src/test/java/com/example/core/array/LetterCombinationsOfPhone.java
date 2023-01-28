@@ -1,4 +1,4 @@
-package com.example.arrays;
+package com.example.core.array;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,19 +8,23 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Given a string containing digits from 2-9 inclusive,
+ * return all possible letter combinations that the number could represent.
+ * Return the answer in any order.
+
+ */
 @Slf4j
 public class LetterCombinationsOfPhone {
 	
 	
-	//@Test
+	@Test
 	void test(){
 		assertEquals(0,solution("").size());
 		assertEquals(new HashSet<>(List.of("ad","ae","af","bd","be","bf","cd","ce","cf")), new HashSet<>(solution("23")));
@@ -29,13 +33,13 @@ public class LetterCombinationsOfPhone {
 
 	
 	//@Test
-	void testRecursive(){
+	/*void testRecursive(){
 		//assertEquals(0,solutionRecursive("").size());
 		assertEquals(new HashSet<>(List.of("ad","ae","af","bd","be","bf","cd","ce","cf")), new HashSet<>(solutionRecursive("23")));
 		
-	}
+	}*/
 	
-	@Test
+	//@Test
 	void testSol3(){
 		//assertEquals(0,solutionRecursive("").size());
 		assertEquals(new HashSet<>(List.of("ad","ae","af","bd","be","bf","cd","ce","cf")), new HashSet<>(sol3("23")));
@@ -43,12 +47,7 @@ public class LetterCombinationsOfPhone {
 	}
 	
 	
-/**
- * Given a string containing digits from 2-9 inclusive, 
- * return all possible letter combinations that the number could represent. 
- * Return the answer in any order.
 
- */
 	private List<String> solution(@NonNull String ph) {
 		if (ph.isEmpty()) {
 			return Collections.emptyList();
@@ -61,22 +60,20 @@ public class LetterCombinationsOfPhone {
 		for (int index=0; index<ph.length(); index++) {
 			
 			String mapped = digits.get(ph.charAt(index)-'2');
-			while (res.peek().length() <= index) {
+
+			while (res.peek() != null && res.peek().length() <= index) {
 				String t = res.removeFirst();
 				for (char mp: mapped.toCharArray()) {
 					res.add(t+mp);
 				}
 			}
-
 		}
-		
-		
 		return new ArrayList<>(res);
 	}
 	
 	
 	
-	private List<String> solutionRecursive(@NonNull String ph) {
+	/*private List<String> solutionRecursive(@NonNull String ph) {
 		if (ph.isEmpty()) {
 			return Collections.singletonList("");
 		}
@@ -84,15 +81,16 @@ public class LetterCombinationsOfPhone {
 		List<String> digits = List.of("abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz");
 		
 		
-		List<String> intermediate = solutionRecursive(ph.substring(1, ph.length()));
+		List<String> intermediate = solutionRecursive(ph.substring(1));
 		String mapped = digits.get(ph.charAt(0)-'2');
+
 		for (char mp: mapped.toCharArray()) {
 			for(String str: intermediate) {
 				res.add(mp+str);
 			}
 		}
 		return res;
-	}
+	}*/
 	
 	List<String> sol3 (String ph){
 	
@@ -112,11 +110,11 @@ public class LetterCombinationsOfPhone {
     }
     else {
         char[] letterArr = letters[ph.charAt(idx) - '2'].toCharArray();
-        for(int j = 0; j < letterArr.length; j++){
-            temp.append(letterArr[j]); // add a letter from letters(index) array
-            backtrack(idx + 1, letters, ph, temp, result); //add it to provided temp StringBuilder
-            temp.deleteCharAt(temp.length() - 1); // remove it to be replaced with the next, if any
-        }
+		for (char c : letterArr) {
+			temp.append(c); // add a letter from letters(index) array
+			backtrack(idx + 1, letters, ph, temp, result); //add it to provided temp StringBuilder
+			temp.deleteCharAt(temp.length() - 1); // remove it to be replaced with the next, if any
+		}
     }
 }
 

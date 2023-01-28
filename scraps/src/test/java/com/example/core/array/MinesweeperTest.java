@@ -1,5 +1,6 @@
-package com.example.arrays;
+package com.example.core.array;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -13,7 +14,7 @@ public class MinesweeperTest {
 	/*
 	 * 
 	 * Minesweeper is a popular single-player computer game. The goal is to locate
-	 * mines within a rectangular grid of cells. At the start of the game, all of
+	 * mines within a rectangular grid of cells. At the start of the game, all
 	 * the cells are concealed. On each turn, the player clicks on a blank cell to
 	 * reveal its contents, leading to the following result:
 	 * 
@@ -101,51 +102,64 @@ public class MinesweeperTest {
 	 * The expanded matrix after the click.
 	 * 
 	 */
-	@Test
-	void test() {
+
+	//@Test
+	void test1(){
 		boolean[][] field = new boolean[][] { { false, true, true }, { true, false, true }, { false, false, true } };
 		int[][] sol = new int[][] { { -1, -1, -1 }, { -1, 5, -1 }, { -1, -1, -1 }
-
 		};
-		// assertTrue(Arrays.equals(sol, solution(field,1,1)));
+		assertArrayEquals(sol, solution(field, 1, 1));
+	}
 
-		field = new boolean[][] { { true, false, true, true, false }, { true, false, false, false, false },
-				{ false, false, false, false, false }, { true, false, false, false, false } };
+	@Test
+	void test() {
 
-		sol = new int[][] { { -1, -1, -1, -1, -1 }, { -1, 3, 2, 2, 1 }, { -1, 2, 0, 0, 0 }, { -1, 1, 0, 0, 0 } };
+		boolean[][] field = new boolean[][] {
+				{ true, false, true, true, false },
+				{ true, false, false, false, false },
+				{ false, false, false, false, false },
+				{ true, false, false, false, false } };
+
+		int[][] sol = new int[][] {
+				{ -1, -1, -1, -1, -1 },
+				{ -1, 3, 2, 2, 1 },
+				{ -1, 2, 0, 0, 0 },
+				{ -1, 1, 0, 0, 0 } };
 		int[][] tested = solution(field, 3, 2);
-		log.info("returned solution {}", tested);
-		log.info("expected solution {}", sol);
+		log.info("returned solution {}", Arrays.deepToString(tested));
+		log.info("expected solution {}", Arrays.deepToString(sol));
 		assertTrue(Arrays.deepEquals(sol, tested));
 
 	}
 
 	int[][] solution(boolean[][] field, int x, int y) {
 
+		//initiate sol with -1 values
 		int[][] sol = new int[field.length][field[0].length];
 		for (int i = 0; i < field.length; i++) {
 			Arrays.fill(sol[i], -1);
 		}
 
 		populateNeighbours(sol, field, x, y);
-		log.info("populated {} ", sol);
+		log.info("populated {} ", Arrays.deepToString(sol));
 
 		int count = 0;
-		while (!allZeroNeighboursRevealed(sol, field) && count < 10) {
+		while (!isAllZeroNeighboursRevealed(sol) && count < 10) {
 			revealZeroNeighbours(sol, field);
 			count++;
+			log.debug("count = {}", count);
 		}
-		;
+
 		return sol;
 	}
 
-//returns true if all zero neighbours have value >=0 neighbours
-	boolean allZeroNeighboursRevealed(int[][] sol, boolean[][] field) {
+	//returns true if all zero neighbours have value >=0 neighbours
+	boolean isAllZeroNeighboursRevealed(int[][] sol) {
 
 		log.info("allZeroNeighboursRevealed ");
 		for (int i = 0; i < sol.length; i++) {
 			for (int j = 0; j < sol[0].length; j++) {
-				if (sol[i][j] == 0 && unrevieled(sol, i, j)) {
+				if (sol[i][j] == 0 && hasUnrevieledValueNeighbours(sol, i, j)) {
 					log.info("allZeroNeighboursRevealed false");
 					return false;
 				}
@@ -155,7 +169,7 @@ public class MinesweeperTest {
 		return true;
 	}
 
-//reveals all neighbors of a zero cell
+	//reveals all neighbors of a cell which has value = zero
 	void revealZeroNeighbours(int[][] sol, boolean[][] field) {
 		for (int i = 0; i < sol.length; i++) {
 			for (int j = 0; j < sol[0].length; j++) {
@@ -177,8 +191,9 @@ public class MinesweeperTest {
 		}
 	}
 
-//returns false if there are -1 value neighbors
-	boolean unrevieled(int[][] sol, int x, int y) {
+	//returns false if there are neighbors with value -1
+	// a cell should have all neighbours with values > -1
+	boolean hasUnrevieledValueNeighbours(int[][] sol, int x, int y) {
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (i >= 0 && i < sol.length && j >= 0 && j < sol[0].length) {
@@ -195,6 +210,7 @@ public class MinesweeperTest {
 	void populateNeighbours(int[][] sol, boolean[][] field, int x, int y) {
 
 		int count = 0;
+		//add all 'true' values from corresponding field cells
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (i >= 0 && i < field.length && j >= 0 && j < field[0].length) {
@@ -206,7 +222,7 @@ public class MinesweeperTest {
 			}
 		}
 		sol[x][y] = count;
-		log.info("populated neighbours for [{}][{}]  {}", x, y, sol);
+		//log.debug("populated neighbours for [{}][{}]  {}", x, y, sol);
 
 	}
 }

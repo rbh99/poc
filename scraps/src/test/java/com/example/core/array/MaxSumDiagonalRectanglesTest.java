@@ -1,4 +1,4 @@
-package com.example.arrays;
+package com.example.core.array;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MaxSumDuagonalRectanglesTest {
+public class MaxSumDiagonalRectanglesTest {
 	/*
 											 * 
 											 * Given a matrix of integers, we'd like to consider the sum of the elements
